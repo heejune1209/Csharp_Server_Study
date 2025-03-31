@@ -42,8 +42,7 @@
               "RelativeToolTip": "DummyClient\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T03:12:41.987Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T03:12:41.987Z"
             },
             {
               "$type": "Document",
@@ -53,7 +52,7 @@
               "RelativeDocumentMoniker": "ServerCore\\Program.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Program.cs",
               "RelativeToolTip": "ServerCore\\Program.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAcwGEAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-31T03:12:15.188Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "Server\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T03:10:09.577Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T03:10:09.577Z"
             }
           ]
         }

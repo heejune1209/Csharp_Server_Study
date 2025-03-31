@@ -12,3 +12,4 @@ C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\refi
 C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.pdb
 C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.genruntimeconfig.cache
 C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ref\ServerCore.dll
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.sourcelink.json
