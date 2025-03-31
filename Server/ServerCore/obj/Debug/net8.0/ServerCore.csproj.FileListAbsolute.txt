@@ -1,0 +1,14 @@
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\bin\Debug\net8.0\ServerCore.exe
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\bin\Debug\net8.0\ServerCore.deps.json
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\bin\Debug\net8.0\ServerCore.runtimeconfig.json
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\bin\Debug\net8.0\ServerCore.dll
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\bin\Debug\net8.0\ServerCore.pdb
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.AssemblyInfo.cs
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.dll
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\refint\ServerCore.dll
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.pdb
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ServerCore.genruntimeconfig.cache
+C:\Users\user\source\repos\Csharp_Server\Server\ServerCore\obj\Debug\net8.0\ref\ServerCore.dll
