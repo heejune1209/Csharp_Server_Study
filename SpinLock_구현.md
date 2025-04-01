@@ -1,0 +1,318 @@
+**[예제 1]**
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace ServerCore
+{
+    // 면접에서도 자주 나오는 질문(구현도 해보기)
+    // monitor의 경우 처럼 들어오는 경우랑 나가는 경우 2가지 인터페이스가 필요
+    class SpinLock
+    {
+        // 가시성 확보
+        // false 이면 잠김이 풀린 상태 
+        // true 이면 잠김 상태 => 누구도 오지 못하게 만듬
+        volatile bool _locked = false;
+
+        public void Acquire()
+        {
+            // 일단 해야할 것은 잠김이 풀릴 때까지 계속 대기를 해야함
+            while (_locked)
+            {
+                // 잠김이 풀리기를 기다리는 상태
+            }
+            // 잠김이 풀렸으니깐 내꺼라고 선언을 해줌
+            _locked = true;
+
+						// 위와 같은 경우에서 문제가 발생되는 이유는
+            // 2개의 쓰레드에서 동시에 Acqire()에 접근해서 lock을 얻은 경우이다.
+        }
+
+        public void Release()
+        {
+            _locked = false;
+        }
+    }
+    class Program
+    {
+        static int num = 0;
+        static SpinLock _lock = new SpinLock();
+
+        static void Thread_1()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                _lock.Acquire();
+                num++;
+                ****_lock.Release();
+            }
+        }
+
+        static void Thread_2()
+        {
+            for (int i = 0; i < 10000; i++)
+            {
+                _lock.Acquire();
+                num--;
+                _lock.Release();
+            }
+          }
+        
+        static void Main(string[] args)
+        {
+            Task t1 = new Task(Thread_1);
+            Task t2 = new Task(Thread_2);
+
+            t1.Start();
+            t2.Start();
+
+            Task.WaitAll(t1, t2);
+
+            System.Console.WriteLine(num); 
+						// 0이 출력되기를 기대하지만 
+						// 이상한 값이 나옴 -3241 
+        }
+    }
+}
+```
+
+왜 위와 같이 구현을 했을 때 이상한 값이 나올까??
+
+![image](https://user-images.githubusercontent.com/75019048/131054499-91766dcf-8a09-4b64-a9ec-45e9a49bd8b3.png)
+
+화장실에 아무도 없는 상태에서 서로 경합을 통해 먼저 자물쇠를 차지하는 사람이 승자가 됨
+
+![image](https://user-images.githubusercontent.com/75019048/131054514-ea519da1-dc90-409d-8549-9de9ad9f07f5.png)
+
+거의 동시에 입장을 했다면?
+
+자물쇠가 잠겨있는 상태가 아니기 때문에 동시에 들어갔다.
+
+![image](https://user-images.githubusercontent.com/75019048/131054524-0fc9d738-a63d-4241-b585-458f2d289cd0.png)
+
+들어온 다음에 문을 잠구면 
+
+![image](https://user-images.githubusercontent.com/75019048/131054534-98e24c23-a177-44ab-a702-517d42880608.png)
+
+위와같이 화장실을 2명에서 차지하는 경우가 된다.
+
+위와 같이 발생되는 부분을 원천적으로 차단을 해야함
+
+즉 하나의 쓰레드에서 lock을 차지하고 문을 잠구는 과정을 한번에 처리할 수 있는 방법을 사용해야한다.
+
+```csharp
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace ServerCore
+{
+    class SpinLock
+    {
+        volatile int _locked = 0; // 1은 true, 0은 false
+        public void Acquire()
+        {
+            while (true)
+            {
+                // Exchange은 _locked가 바뀌기 전의 값을 리턴해줌
+                int original = Interlocked.Exchange(ref _locked, 1); // exchange를 통해 _locked에다가 1을 넣고 리턴 값으로 1을 넣기전의 값을 리턴해줌
+                //  _locked가 바뀌기 전의 값이 0이라면
+                // lock이 풀린 상태이기 때문에 다른 쓰레드가 접근할 수 있도록 대기함
+                // 즉, 원래는 0이였는 데 1로 바뀐 상황을 정확히 추론할 수 있도록 해줌
+                if (original == 0)
+                    break;
+                
+                /*
+                // 위 코드를 쉽게 표현하면
+                {
+                    int original = _locked;
+                    _locked = 1;
+                    // 위 두줄이 한번에 실행되도록 한게 Exchange이다.
+                    if (original == 0)
+                        break;
+                }
+                */
+                // 하지만 아래와 같이 쓰는 게 좀더 안정적이다.
+				// 왜냐하면 직관적으로 이해를 해보았을 때 
+				// lock이 풀린 시점(lock == 0)에서 lock을 차지해줘야 하는 데
+				// 위와 같은 방법은 기존 lock의 값을 
+				// 그래서 CompareExchange()를 사용해야 한다.
+                /*
+                {
+                    if (_locked == 0)
+                        _locked = 1;
+                }
+                */
+            }
+        }
+        // 멀티스레드 환경에서 작업을 하다 보면 
+        // 그린 존과 레드 존을 바라보는 매의 눈이 필요하다.
+        // 즉, 위의 경우에서 _locked는 여러 쓰레드에서 공유하는 값이기 때문에 멋대로 값을 읽어서 사용하면 안된다고 했었는데,
+        // 하지만 그럼에도 불구하고 위에서는 우리가 뱉어준 값을 그냥 그대로 다시 이렇게 if문으로 비교할 수 있는 걸 볼 수 있는데 
+        // 그거는 왜 그러냐면 얘는 스택이 있는 그러니까 경합하지 않는 하나의 Thread에서만 지금 사용하고 있는 값이니까 이런 식으로 해도 전혀 문제가 없다.
+        // original의 경우는 stack에 있기 때문에 값을 바꿀 수도 있게 된다.
+
+        public void Release()
+        {
+            _locked = 0;
+        }
+    }
+
+    class Program
+    {
+        static int num = 0;
+        static SpinLock _lock = new SpinLock();
+
+        static void Thread_1()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                _lock.Acquire();
+                num++;
+                _lock.Release();
+            }
+        }
+
+        static void Thread_2()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                _lock.Acquire();
+                num--;
+                _lock.Release();
+            }
+          }
+        
+        static void Main(string[] args)
+        {
+            Task t1 = new Task(Thread_1);
+            Task t2 = new Task(Thread_2);
+
+            t1.Start();
+            t2.Start();
+
+            Task.WaitAll(t1, t2);
+
+            Console.WriteLine(num);
+        }
+    }
+}
+```
+
+**[또 다른 버전]**
+```csharp
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace ServerCore
+{
+    class SpinLock
+    {
+        volatile int _locked = 0;
+        public void Acquire()
+        {
+            while (true)
+            {
+                // CompareExchange 매개 변수들의 의미
+                // 1. location1 = 조작하기를 원하는 값
+                // 2. value = location1에 넣어줄 값
+                // 3. comparand = location1과 비교할 값
+                // 비교의 결과가 같으면 location1에 value를 넣어준다.
+                // 리턴 값은 original value
+                // 이와 같은 함수를 CAS(Compare-And-Swap) 계열 함수라고 한다.
+                // 결국 비교 후 값을 넣는 것을 한번에 처리하는 함수
+
+                // C++ 스타일의 가독성을 위해 아래와 같이 표현하는 것도 방법
+                /*
+                int expected = 0;
+                int desired = 1;
+                if (Interlocked.CompareExchange(ref _locked, desired, expected) == expected)
+                    break;
+                */    
+
+                // C#의 기존 방법, c++에선 int를 반환하는게 아니라 불리언을 뱉어줄 것이다.
+                int original = Interlocked.CompareExchange(ref _locked, 1, 0);
+                if (original == 0)
+                    break;
+
+                // _locked가 비어있으면 1로 바꿔준다
+                // 위의 코드를 아래와 같이 변환 가능
+                // if (_locked == 0)
+                //     _locked = 1;
+            }
+        }
+
+        public void Release()
+        {
+            // 여기는 별도의 처리를 안해도 됨
+            // Acquire를 통과 했다는 것은 해당 쓰레드에서만 lock을 들고 있는 중이기 때문에 
+            // 어차피 문을 열어주는 작업은 설렁설렁해줘도 가능하다.
+            _locked = 0;
+        }
+    }
+    class Program
+    {
+        static int num = 0;
+        static SpinLock _lock = new SpinLock();
+
+        static void Thread_1()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                _lock.Acquire();
+                num++;
+                _lock.Release();
+            }
+        }
+
+        static void Thread_2()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                _lock.Acquire();
+                num--;
+                _lock.Release();
+            }
+          }
+        
+        static void Main(string[] args)
+        {
+            Task t1 = new Task(Thread_1);
+            Task t2 = new Task(Thread_2);
+
+            t1.Start();
+            t2.Start();
+
+            Task.WaitAll(t1, t2);
+
+            System.Console.WriteLine(num);
+        }
+    }
+}
+```
+
+SpinLock의 기본 철학은 
+
+여러 쓰레드에서 lock을 차지하기 위해 경합이 발생하는 과정에서
+
+lock을 다른 쓰레드에서 차지했다면 
+
+lock이 풀릴 때까지 다른 쓰레드에서 무한 대기를 타는 방법이다.
+
+이를 구현하기 위해서 
+
+Acquire()는 lock을 차지하기 위해 구현한 메서드이고
+
+Release()는 lock을 풀어주기 위해 구현한 메서드이다.
+
+즉, 중요한 것은 lock을 차지하기 위한 과정에서 무한 대기를 타야하기 때문에
+
+Interlocked.CompareExchange() 메서드를 통해서 
+
+기존 lock이 풀려있다면(lock == 0) lock을 차지한 후 Acquire()를 종료하는 프로세스로 진행이 되어야한다.
+
+Acquire()를 통해 lock을 얻은 후 원하는 작업을 끝낸 다음에 Release를 통해 lock을 풀어주는 방식으로 하나의 쓰레드를 실행하는 절차가 Spinlock 구현이다.
+면접에서 물어보면 이런 식으로 뺑뺑이를 돌면서 Compare And Swap 연산을 해서 구현하는 락이다 라고 대답을 하면 된다.
