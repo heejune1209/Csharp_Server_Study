@@ -2,7 +2,7 @@
 
 ![image](https://user-images.githubusercontent.com/86364202/143811611-8673eeff-b3b5-4acd-844f-d8cec3c9df2f.png)
 
-![image](https://i.ibb.co/rKRrhBxB/2025-04-01-151813.png)
+![image](<a href="https://ibb.co/BH5MJhyh"><img src="https://i.ibb.co/rKRrhBxB/2025-04-01-151813.png" alt="2025-04-01-151813" border="0"></a>)
 
 여기서 직원은 커널레벨에 있는 즉, 아래 관리자에 있는 직원으로 어마어마하게 느림
 
