@@ -29,7 +29,7 @@ namespace ServerCore
             // _available이 true면 입장 가능
             // AutoResetEvent의 특징
             // 문을 닫는 것을 자동으로 해줌
-            // _available.Reset -> bool = false 사실 왼쪽 코드가 포함된 개념
+            // _available.Reset이란 코드가 있는데 이거는 bool = false로 넣어주는 개념. 근데 이게 _available.WaitOne(); 이 코드에 세트로 포함이 되어있음
         } 
 
         public void Release()
@@ -217,3 +217,5 @@ namespace ServerCore
     }
 }
 ```
+사실은 그래서 어지간해선 AutoResetEvent만으로 충분하고 뮤텍스는 활용할 일이 거의 없다고 생각하면 된다.
+그러니까 뭔가 우리 식당 관리자한테 가서 뭔가를 하는 거니까 그냥 어마어마하게 느리다는 것까지만 기억.

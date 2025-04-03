@@ -12,6 +12,8 @@
 
 **[무작정 기다리는 전략]**
 
+![Image](https://github.com/user-attachments/assets/4e00e085-647b-4b79-9a2b-5315d9298d9f)
+
 스핀락을 통해 구현 가능
 
 운영체제의 관점에서 보면 직원이 대기를 한다는 것은 직원의 영혼에 빙의를 해서 쓰레드를 실행을 시키는 것을 의미한다. 
@@ -23,6 +25,8 @@
 마냥 가벼운 과정은 아니다. ⇒ CPU 점유율이 확 올라감
 
 **[일단 자리로 돌아가서 대기]**
+
+![Image](https://github.com/user-attachments/assets/2b27b846-73ab-4d3d-8052-a3eaa95ef718)
 
 일단 자리로, 나중에 다시 실행하도록 기다리는 방법이다.
 
@@ -49,6 +53,8 @@ Thread는 결국 CPU core가 해당 쓰레드를 실행을 시키는 것을 의�
 하지만 context switching이 발생하는 상황은 굉장히 많은 부담을 일으키게 된다.
 
 **[이벤트를 통해 통보]**
+
+![Image](https://github.com/user-attachments/assets/572ea10e-fb66-4add-8608-1e180a014311)
 
 자신의 실행권을 양도하는 것은 비슷하다.
 
