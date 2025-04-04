@@ -355,9 +355,11 @@ Interlocked.Increment(ref count);
 락을 사용하지 않기 때문에 대기 시간 없음
 
 🧠 왜 Lock-Free가 중요할까?
+
 ![Image](https://github.com/user-attachments/assets/c922fc92-c069-459d-bb46-400aea291302)
 
 🔧 C#에서 자주 쓰는 Lock-Free 도구들
+
 ![Image](https://github.com/user-attachments/assets/3298c0af-23e4-4e48-b725-23a356dcb4bc)
 
 💡 핵심 메서드 예시: Interlocked.CompareExchange
@@ -372,6 +374,7 @@ _flag의 값이 expected면 → newValue로 바꾸고
 이걸 기반으로 경합 없이 락 없이 자원 제어를 할 수 있음.
 
 🕹️ 게임 서버에서 Lock-Free 예시
+
 채팅 로그 큐, 네트워크 패킷 큐, 오브젝트 풀링 또는 접속 유저 수 카운터 같은 단순 숫자 조작에도 자주 씀
 ```csharp
 Interlocked.Increment(ref connectedUserCount);
