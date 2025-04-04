@@ -12,3 +12,4 @@ C:\Users\user\source\repos\Csharp_Server\Server\DummyClient\obj\Debug\net8.0\ref
 C:\Users\user\source\repos\Csharp_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.pdb
 C:\Users\user\source\repos\Csharp_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.genruntimeconfig.cache
 C:\Users\user\source\repos\Csharp_Server\Server\DummyClient\obj\Debug\net8.0\ref\DummyClient.dll
+C:\Users\user\source\repos\Csharp_Server\Server\DummyClient\obj\Debug\net8.0\DummyClient.sourcelink.json

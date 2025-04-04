@@ -54,6 +54,8 @@ wow와 같은 게임의 서버를 만들 때 위와 같이 쓰레드가 한 곳�
 
 ![image](https://user-images.githubusercontent.com/75019048/131054713-36e071e7-ffec-4276-b8c8-fb4d0c52ca52.png)
 
+![Image](https://github.com/user-attachments/assets/3ef32e0d-6fd1-4a66-a5d9-08416626c0d3)
+
 그래서 알아볼 방법이 Thread Local Storage이다.
 
 이 방법을 통해서 일감을 잘 나누는 방법을 한번 알아보자
@@ -127,19 +129,20 @@ namespace ServerCore
         // 쓰레드 마다 TLS에 접근을 하면 자신만의 공간에 저장이 되기 때문에 
         // 특정 쓰레드에서 쓰레드 이름을 고친다고 해도 다른 쓰레드에는 영향을 주지 않게 된다.
         // 즉, 쓰레드 마다 고유의 영역이 생겼다고 생각하면 된다.
-        static ThreadLocal<string> ThreadName = new ThreadLocal<string>(()=> 
-        { 
+        static ThreadLocal<string> ThreadName = new ThreadLocal<string>(() =>
+        {
             // 쓰레드가 새로 실행될 때마다 100프로 확률로 TLS를 생성하는 것이 아니라
             // 상황에 따라 쓰레드 네임의 밸류가 없을 때 생성?
-            ThreadName.Value = $"My Name is {Thread.CurrentThread.ManagedThreadId}";
+            return $"My Name is {Thread.CurrentThread.ManagedThreadId}";
         });
+
         static void WhoAmI()
         {
             bool isRepeat = ThreadName.IsValueCreated;
             if (isRepeat)
-                System.Console.WriteLine(ThreadName.Value + " (repeat)");
+                Console.WriteLine(ThreadName.Value + " (repeat)");
             else
-                System.Console.WriteLine(ThreadName.Value);
+                Console.WriteLine(ThreadName.Value);
             // repeat으로 출력이 되는 의미는
             // 이미 생성된 쓰레드에서 해당 일감(여기서는 WhoAmI 메서드)을 또 다시 처리한다는 의미
             // 그래서 재사용을 한다고 생각하면 됨
@@ -150,7 +153,7 @@ namespace ServerCore
         {
             // Parallel Library?
             // Invoke()를 사용하면 Action들 만큼 Task를 생성해서 실행시켜줌
-            // 즉, ThreadPool에 있는 Thread들을 하나씩 꺼내서 사용함
+            // 즉, ThreadPool에 있는 Thread들을 하나씩 꺼내서 사용함           
             Parallel.Invoke(WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI, WhoAmI);
             // 모든 사용이 끝나면 폐기
             ThreadName.Dispose();
@@ -164,7 +167,8 @@ namespace ServerCore
         // 즉 JobQueue에 진입 후 lock을 건 상태에서 최대한 일감을 많이 가지고 와서
         // TLS에 저장하면 좀더 경합을 줄일 수 있어서 부하를 낮출 수 있음
         // 이런 상황이 아니라도 다양한 상황에서 사용이 됨
-        // 위의 예와 같이 ThreadName이든 Thread의 고유 ID를 만들든
+        // 위의 예와 같이 ThreadName이든 Thread의 고유 ID를 만들든 
+        // 그냥 Thread에서만 사용할 Thread 고유의 전역 변수를 사용한다고 하면 대충 이런 느낌으로 이 ThreadLocal를 사용하시면 되겠습니다.
     }
 }
 ```
