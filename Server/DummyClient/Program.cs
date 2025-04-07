@@ -56,7 +56,7 @@ namespace DummyClient
                     Console.WriteLine(e.ToString());
                 }
 
-                Thread.Sleep(1000); // 1초 대기
+                Thread.Sleep(100); // 1초 대기
             }
         }
     }
