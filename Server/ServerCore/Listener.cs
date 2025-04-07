@@ -6,27 +6,24 @@ namespace ServerCore
 {
     class Listener
     {
-        // 문지기
         Socket _listenSoket;
 
-        Action<Socket> _OnAcceptHandler;
+        // 세션을 어떤 방식으로 누구를 만들어줄지를 정의
+        // Session 객체를 반환하는 함수를 담는 변수
+        Func<Session> _sessionFactory;
 
-        public void Init(IPEndPoint endPoint, Action<Socket> OnAcceptHandler)
+        public void Init(IPEndPoint endPoint, Func<Session> sessionFactory)
         {
-            _OnAcceptHandler += OnAcceptHandler;
+            _sessionFactory += sessionFactory;
             _listenSoket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
             _listenSoket.Bind(endPoint);
 
-            // 영업 시작
-            // Backlog는 최대 대기수
             _listenSoket.Listen(10);
 
             // 현재 문지기를 한명만 고용을 했기 때문에 
             // 너무 많은 사람이 한번에 접속을 하면 다소 느릴 수도 있다
             // 해서 이 부분을 늘려주면 된다.
-            // 이렇게 직원을 늘려주면 비동기로 직원들이 Receive 처리를 하게 된다.
-            // 낚시대를 여러개로 만들어도 상관없음
             for (int i = 0; i < 10; i++)
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
@@ -55,15 +52,36 @@ namespace ServerCore
             }
         }
 
+        // 클라이언트가 연결되면 호출됨
         private void OnAcceptCompleted(object sender, SocketAsyncEventArgs args)
         {
             if (args.SocketError == SocketError.Success)
             {
-                _OnAcceptHandler.Invoke(args.AcceptSocket);
+                // Program에 있다가 이곳으로 옮긴 이유
+                // Session에서 만든 OnConnected를 이곳에서 실행 시키기 위해서 
+                // 즉 코어(엔진)에서 만들기 위함
+                // 코드 관리도 좀더 나아짐
+                // session이 시작 되는 시점이 엔진 외부로 노출 되는 게
+                // 좀 말이 안되기도 함
+                // 그리고 결론적으로 Session은 엔진 외부에서 만드는 게 맞음
+
+                // 여기서 새로운 세션 객체를 생성함
+                Session session = _sessionFactory.Invoke(); // 실제 GameSession 인스턴스 생성됨
+                session.Start(args.AcceptSocket); // 소켓 연결 및 리시브 등록
+                session.OnConnected(args.AcceptSocket.RemoteEndPoint); // 유저가 접속했을 때 동작
+                // 참고로 Invoke() 함수란?
+                // Invoke()는 델리게이트(delegate) 또는 Func / Action 타입에서 내부에 등록된 함수를 "실행"하는 함수.
+                // 이건 결국 다음과 똑같다.
+                // Session session = new GameSession();
+                // 단지 “함수를 직접 호출하지 않고, 함수 포인터(delegate)를 통해 호출”한 것.
+                //  왜 이렇게 쓰냐?
+                // - 코드를 유연하게 만들기 위해서!
+                // Listener 입장에선 어떤 세션을 생성할지 몰라도,
+                // 나중에 외부에서 함수만 등록해주면 알아서 생성 가능하게 됨.
             }
             else
             {
-                Console.WriteLine(args.SocketError.ToString());
+                System.Console.WriteLine(args.SocketError.ToString());
             }
 
             RegisterAccept(args);
