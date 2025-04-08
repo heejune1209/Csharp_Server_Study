@@ -7,7 +7,8 @@ using System.Threading;
 
 namespace ServerCore
 {
-    abstract class Session
+    // Session은 하나의 클라이언트와 통신을 주고받는 단위 객체의 역할
+    public abstract class Session
     {
         Socket _socket;
         Queue<byte[]> _sendQueue = new Queue<byte[]>();

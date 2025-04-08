@@ -4,7 +4,8 @@ using System.Net.Sockets;
 
 namespace ServerCore
 {
-    class Listener
+    // Listener는 서버 입장에서 클라이언트의 연락을 대기 및 연결 수락 (AcceptAsync())의 역할을 함.
+    public class Listener
     {
         Socket _listenSoket;
 
@@ -66,7 +67,7 @@ namespace ServerCore
                 // 그리고 결론적으로 Session은 엔진 외부에서 만드는 게 맞음
 
                 // 여기서 새로운 세션 객체를 생성함
-                Session session = _sessionFactory.Invoke(); // 실제 GameSession 인스턴스 생성됨
+                Session session = _sessionFactory.Invoke(); // 어떤 종류의 세션을 만들지 결정하고, 그 인스턴스를 생성
                 session.Start(args.AcceptSocket); // 소켓 연결 및 리시브 등록
                 session.OnConnected(args.AcceptSocket.RemoteEndPoint); // 유저가 접속했을 때 동작
                 // 참고로 Invoke() 함수란?

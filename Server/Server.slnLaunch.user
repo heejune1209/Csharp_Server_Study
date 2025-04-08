@@ -3,11 +3,11 @@
     "Name": "새 프로필",
     "Projects": [
       {
-        "Path": "ServerCore\\ServerCore.csproj",
+        "Path": "DummyClient\\DummyClient.csproj",
         "Action": "Start"
       },
       {
-        "Path": "DummyClient\\DummyClient.csproj",
+        "Path": "Server\\Server.csproj",
         "Action": "Start"
       }
     ]
