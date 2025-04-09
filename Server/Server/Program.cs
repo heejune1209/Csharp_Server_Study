@@ -15,29 +15,39 @@ namespace Server
     // 결국 Sever가 컨텐츠를 관리하는 곳이 되는거고 
     // ServerCore가 엔진이 되는 것이다.
     // Server에서는 Session의 인터페이스만 가지고 와서 사용
-    public class Knight
+    
+    // 패킷으로 보내기 위해서는 사이즈를 최대한 압축하는 것이 좋다.
+    // 스노우 볼 효과가 나타날 수 있음
+    public class Packet
     {
-        public int hp;
-        public int attack;
-        public string name;
-        public List<int> skills = new List<int>();
+        public ushort size; // 2byte
+        // 패킷을 구분하기 위한 ID
+        // ID만으로는 문제가 있는 게 
+        // 패킷에 따라 사이즈가 동적으로 변할 수가 있다.
+        public ushort packetId; // 2byte
     }
-    class GameSession : Session
+    public class LoginOkPacket : Packet
+    {
+        // 캐릭터의 정보를 List로 들고 있다면?
+        // LoginOkPacket의 사이즈가 유동적으로 변할 수 있음
+    }
+
+    class GameSession : PacketSession
     {
         public override void OnConnected(EndPoint endPoint)
         {
             // 연결된 클라이언트의 EndPoint를 로그로 남긴다.
             System.Console.WriteLine($"OnConnected : {endPoint}");
 
-            Knight knight = new Knight() { hp = 100, attack = 10 };
+            Packet packet = new Packet() { size = 100, packetId = 10 };
 
             // SendBufferHelper 호출
             // 이 호출은 현재 쓰레드에 할당된 SendBuffer(크기가 ChunkSize인 큰 버퍼)가 있는지 확인한다.
             // 만약 없다면 새 SendBuffer를 생성한다.
             // 그리고 reserveSize(여기서는 4096 바이트)를 위해 버퍼 내의 사용 가능한 공간을 예약한 ArraySegment<byte>를 반환한다.
             ArraySegment<byte> openSegment = SendBufferHelper.Open(4096);
-            byte[] buffer = BitConverter.GetBytes(knight.hp);
-            byte[] buffer2 = BitConverter.GetBytes(knight.attack);
+            byte[] buffer = BitConverter.GetBytes(packet.size);
+            byte[] buffer2 = BitConverter.GetBytes(packet.packetId);
 
             // buffer : 복사 할 source
             // openSegment.Array : 붙여넣을 Array
@@ -64,18 +74,26 @@ namespace Server
             Disconnect();
         }
 
+        // buffer : 1개의 유효한(완전한) 패킷
+        // 처음 2바이트 : 패킷의 사이즈
+        // 다음 2바이트 : 패킷의 ID
+        // 1개의 완전한 패킷을 받았을 때 어떤 처리를 할지 결정
+        public override void OnRecvPacket(ArraySegment<byte> buffer)
+        {
+            ushort size = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
+            ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset + 2);
+            Console.WriteLine($"Recive Package size : {size}, ID : {id}");
+        }
+        // 중요한 선수 작업이다.
+        // 패킷을 설계하기 앞서서 2바이트로 패킷의 사이즈를 먼저 확인 한 다음에
+        // 전체 패킷을 조립해서 넘겨주는 작업까지 완료하게 됨
+
         public override void OnDisconnected(EndPoint endPoint)
         {
             Console.WriteLine($"OnDisconnected : {endPoint}");
         }
 
-        public override int OnRecv(ArraySegment<byte> buffer)
-        {
-            string recvData = Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
-            Console.WriteLine($"From Client  : {recvData}");
-
-            return buffer.Count; // 처리한 바이트 수를 리턴
-        }
+        
 
         public override void OnSend(int numOfBytes)
         {

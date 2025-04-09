@@ -79,6 +79,10 @@ namespace ServerCore
             // **관련된 객체(예: Session, ClientID 등)**를 담아두는 거야.
 
             RegisterConnect(args);
+
+            // 이 과정에서 Connector는 각 연결 시도마다 별도의 Socket을 생성하고,
+            // 이를 args.UserToken에 저장함으로써, 나중에 연결 완료 콜백에서 해당 소켓을 가져올 수 있게 한다.
+            // 여러 연결 요청을 동시에 처리할 수 있도록 독립적으로 소켓 객체들이 생성된다.
         }
 
         void RegisterConnect(SocketAsyncEventArgs args)

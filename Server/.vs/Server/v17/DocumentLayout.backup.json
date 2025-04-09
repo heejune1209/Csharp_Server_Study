@@ -11,16 +11,12 @@
       "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,6 +25,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\recvbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\recvbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,70 +51,70 @@
           ]
         },
         {
-          "DockedWidth": 179,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 169,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "SendBuffer.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\SendBuffer.cs",
               "RelativeDocumentMoniker": "ServerCore\\SendBuffer.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\SendBuffer.cs",
               "RelativeToolTip": "ServerCore\\SendBuffer.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAADIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAQwFcAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T03:03:54.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "RecvBuffer.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\RecvBuffer.cs",
               "RelativeDocumentMoniker": "ServerCore\\RecvBuffer.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\RecvBuffer.cs",
               "RelativeToolTip": "ServerCore\\RecvBuffer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAhwCsAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAhwCsAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T13:51:19.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Session.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Session.cs",
               "RelativeDocumentMoniker": "ServerCore\\Session.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Session.cs",
               "RelativeToolTip": "ServerCore\\Session.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAjwDUAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAswA4BAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T09:53:45.44Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Connector.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Connector.cs",
               "RelativeDocumentMoniker": "ServerCore\\Connector.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Connector.cs",
               "RelativeToolTip": "ServerCore\\Connector.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAmwB8AAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAlwHEAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T03:31:13.837Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Listener.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Listener.cs",
               "RelativeDocumentMoniker": "ServerCore\\Listener.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Listener.cs",
               "RelativeToolTip": "ServerCore\\Listener.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAuwFQAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAhwE4AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T07:01:16.779Z",
               "EditorCaption": ""
@@ -122,7 +122,7 @@
           ]
         },
         {
-          "DockedWidth": 221,
+          "DockedWidth": 231,
           "SelectedChildIndex": 1,
           "Children": [
             {
@@ -133,7 +133,7 @@
               "RelativeDocumentMoniker": "DummyClient\\Program.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Program.cs",
               "RelativeToolTip": "DummyClient\\Program.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAkwDUAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAuwBQAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-31T03:12:41.987Z",
               "EditorCaption": ""
@@ -146,7 +146,7 @@
               "RelativeDocumentMoniker": "Server\\Program.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Program.cs",
               "RelativeToolTip": "Server\\Program.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAuwCUAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAgwFkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-08T14:44:37.776Z",
               "EditorCaption": ""

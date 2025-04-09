@@ -7,6 +7,77 @@ using System.Threading;
 
 namespace ServerCore
 {
+    // abstract이기 때문에 Session의 abstract 메서드를 구현 할 필요가 없다.
+    public abstract class PacketSession : Session
+    {
+        // readonly 키워드는 해당 필드가 한 번 초기화된 후(생성자나 선언 시)
+        // 변경될 수 없음을 보장하는 기능을 합니다. const와 유사한 기능.
+        // 하지만 const는 컴파일 타임에 결정되는 상수고, readonly는 런타임에 결정되는 상수다.
+        public static readonly int HeaderSize = 2;
+
+        // sealed 키워드를 붙여주면 봉인 효과
+        // 다른 클래스가 PacketSession을 상속 받은 다음에
+        // OnRecv를 override 하려고 하면 error가 나온다.
+        // PacketSession에서 OnRecv를 할 때는 여기서 parsing을 해줌
+
+        // 정리
+        // OnRecv는 OnRecvComplected에서 호출이 된다.
+        // 즉 일단 클라쪽에서 패킷을 보내고 조금의 패킷이라도 일단 도착을 하면 호출이 되는 메서드다.
+        // 따라서 도착한 패킷을 Parsing 해주는 프로세스로 이해하면 좋다.
+        public sealed override int OnRecv(ArraySegment<byte> buffer)
+        {
+            int processLength = 0;
+
+            // 상대방이 보낸 패킷의 내용물 예시
+            // [size(2)][packetId(2)][....][size(2)][packetId(2)]... 반복
+            // 앞에 size(2)가 왔는지 먼저 확인
+            // 가장 앞서 도착한 패킷의 사이즈를 통해 1개의 패킷을 처리하고 이것을 계속 반복
+            while (true)
+            {
+                // 최소한 헤더를 파싱할 수 있는지 확인 => 헤더 부분이 올 때까지 대기
+                if (buffer.Count < HeaderSize)
+                    break;
+
+                // 패킷이 완전체로 도착했는지 확인
+                // ToUInt16 : byte array에서 원하는 시작 부분에서부터 2바이트(16비트) 데이터를 ushort로 전환
+                ushort dataSize = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
+
+                // 패킷이 완전체가 아니라 부분적으로 왔다는 의미
+                // buffer.Count가 패킷의 사이즈보다 커야 완전히 패킷이 도착했다는 의미
+                if (buffer.Count < dataSize)
+                    break;
+
+                // 여기서 패킷을 조합
+                // 1개의 패킷의 유효 범위를 전달해서 처리
+                OnRecvPacket(new ArraySegment<byte>(buffer.Array, buffer.Offset, dataSize));
+                // buffer.Slice()를 통해 컷팅을 하는 것도 가능하다 
+                // => new ArraySegment가 가독성이 좀 더 좋고 struct라서 힙에 할당 되지도 않음 
+
+                // 패킷 처리를 진행해야 할 전체 패킷의 크기를 저장
+                processLength += dataSize;
+
+                // 전체 패킷에서 하나의 패킷을 제거
+                // buffer.Offset + dataSize : 1개의 패킷을 제거 한 다음부터 시작
+                // buffer.Count - dataSize : 1개의 패킷을 제거한 다음 전체 크기
+                buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
+            }
+
+            // break가 될 때까지 처리한 바이트의 수
+            return processLength;
+        }
+
+        // PacketSession에서는 OnRecvPacket을 통해 받도록 설계
+        // 실제 OnRecvPacket를 구현할 때 OnRecv를 사용해서 처리할 예정
+        // ArraySegment<byte> buffer : 패킷에 해당하는 영역을 다시 집어주기 위함
+        // 1개의 완전한 패킷이 도착했을 때 어떤 처리를 할지를 구현
+        public abstract void OnRecvPacket(ArraySegment<byte> buffer);
+
+        // 이제 PacketSession을 받아서 사용을 하면 Parsing 하는 부분은 내부에서 알아서 작업을 해줄 거고
+        // 실제로 OnRecvPacket()의 매개변수를 통해 유효범위만 집어서 넘어오게 될텐데
+        // 그것을 컨텐츠 단에서 packet id를 추출해서 switch case 문으로 작업을 할 예정
+    }
+
+
     public abstract class Session
     {
         Socket _socket;
