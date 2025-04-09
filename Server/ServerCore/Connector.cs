@@ -95,6 +95,9 @@ namespace ServerCore
                 OnConnectedComplected(null, args);
             }
         }
+
+        // ConnectAsync() 완료 후:
+        // Connector의 OnConnectedComplected() 콜백이 실행된다.
         void OnConnectedComplected(object sender, SocketAsyncEventArgs args)
         {
             if (args.SocketError == SocketError.Success)
@@ -102,6 +105,8 @@ namespace ServerCore
                 // 이렇게 Session이 현재 abstract로 만들었기 때문에 
                 // 어떤 Session을 만들어야하는지 알아야 한다.
                 // 이것을 _sessionFactory를 통해 받아온다.
+                // 세션 팩토리 함수를 호출해  (예: () => new GameSession())를 실행하여,
+                // 새로운 Session(예: GameSession) 인스턴스를 생성
                 Session session = _sessionFactory.Invoke();
 
                 // session을 start하기 위해서는 socket이 필요한데
@@ -109,7 +114,16 @@ namespace ServerCore
                 // 즉 현재 연결한 socket으로 register를 한다.
                 // UserToken에 있는 socket을 사용해도 동일하게 동작은 할것이다.
                 // 그래도 ConnectSocket이 좀더 세련되어 보임
+                
+                // 새로 생성한 Session 객체에 현재 연결된 소켓을 전달하여 
+                // 해당 클라이언트와의 통신을 시작하도록 한다.
                 session.Start(args.ConnectSocket);
+
+                // 생성된 Session 객체의 Start() 메서드는
+                // 전달받은 연결 소켓 (args.ConnectSocket)을 내부 멤버 변수에 저장하고,
+                // 비동기 네트워크 수신(ReceiveAsync)을 위한 초기 준비를 시작한다.
+
+                // 연결이 성공했다는 것을 Session 내부에 알리기 위해 OnConnected 호출
                 session.OnConnected(args.RemoteEndPoint);
             }
             else
