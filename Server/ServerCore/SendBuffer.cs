@@ -49,6 +49,9 @@ namespace ServerCore
             // if 문을 모두 타지 않는다 => 현재 buffer에 공간이 남아 있다.
             return CurrentBuffer.Value.Open(reserveSize);
         }
+        // 현재 쓰레드에 할당된 SendBuffer(크기가 ChunkSize인 큰 버퍼)가 있는지 확인한다.
+        // 만약 없다면 새 SendBuffer를 생성한다.
+        // 그리고 reserveSize(여기서는 4096 바이트)를 위해 버퍼 내의 사용 가능한 공간을 예약한 ArraySegment<byte> 를 반환한다.
         public static ArraySegment<byte> Close(int usedSize)
         {
             return CurrentBuffer.Value.Close(usedSize);
@@ -148,5 +151,6 @@ namespace ServerCore
             // 실제로 사용한 범위를 전달
             return segment;
         }
+        // Close()는 실제로 사용한 영역을 확정(커서 이동)하고, 그 구간을 ArraySegment<byte>로 반환한다.
     }
 }
