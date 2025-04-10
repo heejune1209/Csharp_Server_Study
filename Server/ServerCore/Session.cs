@@ -27,9 +27,15 @@ namespace ServerCore
         // 헤더와 실제 데이터를 구분하고 각각의 의미를 추출하는 작업을 "파싱한다"라고 부릅니다.
 
         // 정리
-        // 클라이언트든 서버든 메세지를 받을때 전체적인 수신 데이터 처리 흐름은
-        // OnRecvComplected → PacketSession의 OnRecv → (구현된) OnRecvPacket, 이 흐름으로 진행된다.
-        
+        // 클라이언트든 서버든 메세지를 받을때 같은 수신 메커니즘(ReceiveAsync, OnRecvComplected 등)을 거치지만,
+        // 서버는 OnRecvComplected → PacketSession의 OnRecv (sealed로 구현되어 패킷 단위로 파싱)
+        // → OnRecvPacket (구체적인 패킷 처리를 위해 구현된 메서드) 흐름으로 처리됩니다.
+        // 이렇게 흐름이 진행되고,
+
+        // 클라이언트는 Session을 상속받아 OnRecv를 직접 구현했기 때문에,
+        // 수신된 데이터는 OnRecvComplected → 구현된 OnRecv 흐름으로 처리됩니다.
+        // 이 흐름대로 진행됨.
+
         // OnRecvComplected:
         // 소켓의 비동기 Receive 작업이 완료되면 OS나 직접 호출을 통해 호출되어, 받은 데이터를 RecvBuffer에 기록하고 다음 단계로 넘긴다.
         // 여기서 RecvBuffer의 Write/Read 커서가 갱신되고, 도착한 데이터가 담긴 ReadSegment를 준비해.
