@@ -31,6 +31,40 @@ namespace DummyClient
     {
         public long playerId; // 8바이트
         public string name;
+
+        public struct SkillInfo
+        {
+            public int id; // 4바이트
+            public short level; // 2바이트
+            public float duration; // 4바이트
+            // 스킬 하나 마다 byte array에 밀어 넣어주기 위한 인터페이스
+            // return value가 boolean 타입인 이유 : TryWriteBytes와 인터페이스를 맞추기 위해서
+            public bool Write(Span<byte> s, ref ushort count)
+            {
+                // SkillInfo가 들고 있는 데이터 들을 하나씩 밀어넣어주는 작업을 해준다.
+                bool success = true;
+                success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), id);
+                count += sizeof(int);
+                success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), level);
+                count += sizeof(short);
+                success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), duration);
+                count += sizeof(float);
+
+                return success;
+            }
+            public void Read(ReadOnlySpan<byte> s, ref ushort count)
+            {
+                id = BitConverter.ToInt32(s.Slice(count, s.Length - count));
+                count += sizeof(int);
+                level = BitConverter.ToInt16(s.Slice(count, s.Length - count));
+                count += sizeof(short);
+                // float 타입은 ToSingle이다(double은 ToDouble).
+                duration = BitConverter.ToSingle(s.Slice(count, s.Length - count));
+                count += sizeof(float);
+            }
+        }
+        public List<SkillInfo> skills = new List<SkillInfo>();
+
         public PlayerInfoReq()
         {
             // PlayerInfoReq의 PacketID는 이미 정해져 있으므로 생성자를 통해 초기화
@@ -93,6 +127,26 @@ namespace DummyClient
             // Encoding.Unicode.GetString()를 사용하여, s의 현재 count 위치에서 nameLen 바이트 만큼 읽어 string으로 변환
             this.name = Encoding.Unicode.GetString(s.Slice(count, nameLen));
             // 지정된 길이만큼의 바이트 데이터를 Unicode 인코딩으로 string으로 변환하여 name에 저장합니다.
+            count += nameLen;
+
+            // skill list
+            // ToUInt16 : unsigned short
+            // ToInt16 : (signed) short
+            // 스킬의 갯수를 추출
+            ushort skillLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+            count += sizeof(ushort);
+
+            // 혹시 skills에 원치 않는 값이 들어 갔을 경우를 위해 Clear
+            skills.Clear();
+
+            for (int i = 0; i < skillLen; i++)
+            {
+                SkillInfo skill = new SkillInfo();
+                // 새로 생성한 skill에 전달 받은 패킷의 정보를 역직렬화
+                skill.Read(s, ref count);
+                // 해당 SkillInfo를 패킷의 List<SkillInfo>에 추가
+                skills.Add(skill);
+            }
         }
 
         // SendBuffer를 통해 보낼 패킷의 정보를 하나의 ArraySegment에 밀어 넣은 다음에 해당 값을 반환
@@ -197,6 +251,20 @@ namespace DummyClient
             count += nameLen;
             // 이렇게 하면 위에서 했던것 보다 더 효율적으로 한방에 처리가 된다
 
+            // 스킬 하나마다 byte array에 밀어 넣어줘야 한다.
+            // skill
+            // (ushort)skills.Count : 스킬(list)이 들고 있는 갯수의 크기를 byte array에 밀어 넣어준다.
+            // Count가 int 타입이기 때문에 2바이트 크기로 변환해 준 다음 밀어 넣어 준다.
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)skills.Count);
+            count += sizeof(ushort);
+
+            foreach (SkillInfo skill in skills)
+            {
+                // ref로 count를 늘려주기 때문에 굳이 한번 더 늘려줄 필요가 없다.
+                success &= skill.Write(s, ref count);
+            }
+
+
             // 패킷 전체 크기 기록
             // 마지막으로, 처음에 비워둔 패킷 전체 크기 영역에 실제 사용한 count 값을 기록  
             // 이로써, 패킷의 첫 2바이트에는 전체 패킷의 크기가 기록되게 됩니다.
@@ -240,6 +308,11 @@ namespace DummyClient
 
             // PlayerInfoReq 패킷 생성
             PlayerInfoReq packet = new PlayerInfoReq() { playerId = 1001, name = "ABCD" };
+
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { id = 101, level = 1, duration = 3.0f });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { id = 201, level = 2, duration = 4.0f });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { id = 301, level = 3, duration = 5.0f });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { id = 401, level = 4, duration = 6.0f });
 
             // for (int i = 0; i < 5; i++)
             {
