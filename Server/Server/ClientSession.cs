@@ -18,20 +18,20 @@ namespace Server
 
     // 패킷으로 보내기 위해서는 사이즈를 최대한 압축하는 것이 좋다.
     // 스노우 볼 효과가 나타날 수 있음
-    public abstract class Packet
-    {
-        public ushort size; // 2
-        public ushort packetId; // 2
-        public abstract ArraySegment<byte> Write();
-        public abstract void Read(ArraySegment<byte> s);
-    }
+    //public abstract class Packet
+    //{
+    //    public ushort size; // 2
+    //    public ushort packetId; // 2
+    //    public abstract ArraySegment<byte> Write();
+    //    public abstract void Read(ArraySegment<byte> s);
+    //}
 
     // PlayerInfoReq 클래스
     // Packet을 상속받아, 플레이어 요청에 필요한 정보를 담습니다.
     // 예를 들어 playerId를 필드로 가지고 있으며,
     // Write() 메서드에서는 자신의 데이터를 바이트 배열로 직렬화하고,
     // Read() 메서드에서는 받은 바이트 배열에서 데이터를 추출합니다.
-    class PlayerInfoReq : Packet
+    class PlayerInfoReq
     {
         public long playerId; // 8바이트
         public string name;
@@ -68,13 +68,7 @@ namespace Server
             }
         }
         public List<SkillInfo> skills = new List<SkillInfo>();
-
-        public PlayerInfoReq()
-        {
-            // PlayerInfoReq의 PacketID는 이미 정해져 있으므로 생성자를 통해 초기화
-            // Packet의 필드인 packetId를 PlayerInfoReq에 맞는 값으로 설정합니다.
-            this.packetId = (ushort)PacketId.PlayerInfoReq;
-        }
+       
 
 
         // Read는 서버에 있는 클라이언트 세션에서 클라이언트가 보낸 패킷을 받았을 때
@@ -82,7 +76,7 @@ namespace Server
         // 새롭게 생성한 해당 패킷의 객체에 할당하는 과정이다.
         // Read는 받은 패킷을 하나씩 까보면서 값을 할당하고 있기 때문에 
         // 조심해야할 필요가 있다.
-        public override void Read(ArraySegment<byte> segment)
+        public void Read(ArraySegment<byte> segment)
         {
             // 읽기 시작할 위치를 나타내는 변수
             ushort count = 0;
@@ -156,7 +150,7 @@ namespace Server
         // SendBuffer를 통해 보낼 패킷의 정보를 하나의 ArraySegment에 밀어 넣은 다음에 해당 값을 반환
         // write의 경우 패킷에 원하는 값은 넣는 모든 과정을 직접 컨트롤 하고 있기 때문에 별 문제가 없다.
         // 직렬화 과정
-        public override ArraySegment<byte> Write()
+        public ArraySegment<byte> Write()
         {
             // 버퍼 예약
             // SendBufferHelper를 호출해,
@@ -192,7 +186,7 @@ namespace Server
             // packetId 직렬화
             // packetId 값을 직렬화하여, 현재 count 위치에 기록
             // 현재 count 위치부터 남은 영역에 packetId를 바이트 배열로 기록.
-            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.packetId);
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.PlayerInfoReq);
             // packetId를 기록한 후, count를 2바이트 증가시킵니다.
             count += sizeof(ushort);
             // playerId 값을 직렬화하여 현재 count 위치에 playerId(8바이트)를 기록합니다.
@@ -297,7 +291,7 @@ namespace Server
 
     // 패킷 아이디로 패킷을 구분
     // 나중에는 자동화를 할 예정
-    public enum PacketId
+    public enum PacketID
     {
         PlayerInfoReq = 1,
         PlayerInfoOk = 2,
@@ -309,7 +303,7 @@ namespace Server
     // 클라쪽에 서버의 대리자가 서버 세션이고,
     // 반대로 서버쪽에 클라의 대리자가 클라이언트 세션이다.
     // 각자의 대리자가 되어 요청을 처리하는 역할
-    public class ClientSession : PacketSession
+    class ClientSession : PacketSession
     {
         public override void OnConnected(EndPoint endPoint)
         {
@@ -364,9 +358,9 @@ namespace Server
             ushort packetId = BitConverter.ToUInt16(buffer.Array, buffer.Offset + count);
             count += 2;
 
-            switch ((PacketId)packetId)
+            switch ((PacketID)packetId)
             {
-                case PacketId.PlayerInfoReq:
+                case PacketID.PlayerInfoReq:
                     {
                         PlayerInfoReq p = new PlayerInfoReq();
                         p.Read(buffer); // 역직렬화

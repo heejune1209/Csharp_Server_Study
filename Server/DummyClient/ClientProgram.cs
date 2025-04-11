@@ -8,7 +8,7 @@ using System.Threading;
 namespace DummyClient
 {
     
-    class Program
+    class ClientProgram
     {
         static void Main(string[] args)
         {

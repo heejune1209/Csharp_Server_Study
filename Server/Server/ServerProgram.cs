@@ -12,7 +12,7 @@ using static Server.PlayerInfoReq;
 namespace Server
 {
     
-    class Program
+    class ServerProgram
     {
         // 해당 리스너는 프로그램 전체에서 하나의 인스턴스로 공유.
         // 어디서든 접근할 수 있게 할수 있다.

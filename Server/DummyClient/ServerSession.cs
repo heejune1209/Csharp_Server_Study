@@ -9,25 +9,20 @@ using System.Threading.Tasks;
 
 namespace DummyClient
 {
-    // 패킷 헤더
-    // Packet 클래스 
-    // 패킷의 기본 필드인 size와 packetId를 갖고,
-    // 직렬화(Write), 역직렬화(Read) 추상 메서드를 정의하여,
-    // 구체적인 패킷(예: PlayerInfoReq, PlayerInfoOk 등)의 공통 인터페이스 역할을 합니다.
-    public abstract class Packet
-    {
-        public ushort size; // 2
-        public ushort packetId; // 2
-        public abstract ArraySegment<byte> Write();
-        public abstract void Read(ArraySegment<byte> s);
-    }
-
+    // 패킷 자동화를 하기 위해서 패킷 클래스를 지움 
+    //public abstract class Packet
+    //{
+    //    public ushort size; // 2
+    //    public ushort packetId; // 2
+    //    public abstract ArraySegment<byte> Write();
+    //    public abstract void Read(ArraySegment<byte> s);
+    //}
     // PlayerInfoReq 클래스
     // Packet을 상속받아, 플레이어 요청에 필요한 정보를 담습니다.
     // 예를 들어 playerId를 필드로 가지고 있으며,
     // Write() 메서드에서는 자신의 데이터를 바이트 배열로 직렬화하고,
     // Read() 메서드에서는 받은 바이트 배열에서 데이터를 추출합니다.
-    class PlayerInfoReq : Packet
+    class PlayerInfoReq
     {
         public long playerId; // 8바이트
         public string name;
@@ -65,12 +60,7 @@ namespace DummyClient
         }
         public List<SkillInfo> skills = new List<SkillInfo>();
 
-        public PlayerInfoReq()
-        {
-            // PlayerInfoReq의 PacketID는 이미 정해져 있으므로 생성자를 통해 초기화
-            // Packet의 필드인 packetId를 PlayerInfoReq에 맞는 값으로 설정합니다.
-            this.packetId = (ushort)PacketId.PlayerInfoReq;
-        }
+
 
 
         // Read는 서버에 있는 클라이언트 세션에서 클라이언트가 보낸 패킷을 받았을 때
@@ -78,7 +68,7 @@ namespace DummyClient
         // 새롭게 생성한 해당 패킷의 객체에 할당하는 과정이다.
         // Read는 받은 패킷을 하나씩 까보면서 값을 할당하고 있기 때문에 
         // 조심해야할 필요가 있다.
-        public override void Read(ArraySegment<byte> segment)
+        public void Read(ArraySegment<byte> segment)
         {
             // 읽기 시작할 위치를 나타내는 변수
             ushort count = 0;
@@ -152,7 +142,7 @@ namespace DummyClient
         // SendBuffer를 통해 보낼 패킷의 정보를 하나의 ArraySegment에 밀어 넣은 다음에 해당 값을 반환
         // write의 경우 패킷에 원하는 값은 넣는 모든 과정을 직접 컨트롤 하고 있기 때문에 별 문제가 없다.
         // 직렬화 과정
-        public override ArraySegment<byte> Write()
+        public ArraySegment<byte> Write()
         {
             // 버퍼 예약
             // SendBufferHelper를 호출해,
@@ -188,7 +178,7 @@ namespace DummyClient
             // packetId 직렬화
             // packetId 값을 직렬화하여, 현재 count 위치에 기록
             // 현재 count 위치부터 남은 영역에 packetId를 바이트 배열로 기록.
-            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.packetId);
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.PlayerInfoReq);
             // packetId를 기록한 후, count를 2바이트 증가시킵니다.
             count += sizeof(ushort);
             // playerId 값을 직렬화하여 현재 count 위치에 playerId(8바이트)를 기록합니다.
@@ -293,7 +283,7 @@ namespace DummyClient
 
     // 패킷 아이디로 패킷을 구분
     // 나중에는 자동화를 할 예정
-    public enum PacketId
+    public enum PacketID
     {
         PlayerInfoReq = 1,
         PlayerInfoOk = 2,
