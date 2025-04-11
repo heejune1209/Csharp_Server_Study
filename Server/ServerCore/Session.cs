@@ -28,6 +28,7 @@ namespace ServerCore
 
         // 정리
         // 클라이언트든 서버든 메세지를 받을때 같은 수신 메커니즘(ReceiveAsync, OnRecvComplected 등)을 거치지만,
+        
         // 서버는 OnRecvComplected → PacketSession의 OnRecv (sealed로 구현되어 패킷 단위로 파싱)
         // → OnRecvPacket (구체적인 패킷 처리를 위해 구현된 메서드) 흐름으로 처리됩니다.
         // 이렇게 흐름이 진행되고,
