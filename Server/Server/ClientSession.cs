@@ -364,7 +364,7 @@ namespace Server
                     {
                         PlayerInfoReq p = new PlayerInfoReq();
                         p.Read(buffer); // 역직렬화
-                                        //count += 8;
+                        //count += 8;
                         Console.WriteLine($"PlayerInfoReq : {p.playerId} {p.name}");
 
                         foreach (PlayerInfoReq.SkillInfo skill in p.skills)

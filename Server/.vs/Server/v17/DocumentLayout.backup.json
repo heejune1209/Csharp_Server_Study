@@ -55,7 +55,7 @@
           ]
         },
         {
-          "DockedWidth": 229,
+          "DockedWidth": 138,
           "SelectedChildIndex": 5,
           "Children": [
             {
@@ -129,9 +129,9 @@
               "Title": "ClientSession.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ClientSession.cs",
               "RelativeDocumentMoniker": "Server\\ClientSession.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ClientSession.cs*",
-              "RelativeToolTip": "Server\\ClientSession.cs*",
-              "ViewState": "AgIAAA8AAAAAAAAAAADwv8YAAAA0AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ClientSession.cs",
+              "RelativeToolTip": "Server\\ClientSession.cs",
+              "ViewState": "AgIAAEoBAAAAAAAAAAAQwGABAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:29:46.47Z",
               "EditorCaption": ""
@@ -139,7 +139,7 @@
           ]
         },
         {
-          "DockedWidth": 170,
+          "DockedWidth": 261,
           "SelectedChildIndex": 1,
           "Children": [
             {
@@ -163,7 +163,7 @@
               "RelativeDocumentMoniker": "DummyClient\\ServerSession.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\ServerSession.cs",
               "RelativeToolTip": "DummyClient\\ServerSession.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAAuwIEAAAA5AAAAAAAAAA==",
+              "ViewState": "AgIAACIBAAAAAAAAAAAYwDkBAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:27:19.32Z",
               "EditorCaption": ""

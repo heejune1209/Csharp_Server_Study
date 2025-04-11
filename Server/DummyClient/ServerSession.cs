@@ -27,34 +27,71 @@ namespace DummyClient
         public long playerId; // 8바이트
         public string name;
 
+        // 스킬 정보 구조체: 각 스킬의 id, level, 그리고 지속 시간(duration)을 담습니다.
+        // 이 구조체는 직렬화(Write)와 역직렬화(Read)를 위한 인터페이스를 제공합니다.
         public struct SkillInfo
         {
             public int id; // 4바이트
             public short level; // 2바이트
-            public float duration; // 4바이트
+            public float duration; // 4바이트 부동소수점
+
             // 스킬 하나 마다 byte array에 밀어 넣어주기 위한 인터페이스
             // return value가 boolean 타입인 이유 : TryWriteBytes와 인터페이스를 맞추기 위해서
+            // Write는 현재 구조체의 필드들을 주어진 Span<byte>에
+            // 순차적으로 직렬화(바이트 배열에 "밀어 넣기")합니다.
+            // Span<byte> s : 직렬화할 대상 바이트 Span</param>
+            // ref ushort count : 현재까지 사용한 바이트 수를 나타내는 카운터.
+            // 이 값은 직렬화 중에 업데이트되어, 각 데이터가 기록된 이후의 시작 인덱스를 나타냅니다.
+            // 반환값 : 모든 필드를 올바르게 직렬화할 수 있으면 true, 실패하면 false를 반환합니다
             public bool Write(Span<byte> s, ref ushort count)
             {
                 // SkillInfo가 들고 있는 데이터 들을 하나씩 밀어넣어주는 작업을 해준다.
                 bool success = true;
+                // 1. id 필드 직렬화 (4바이트)
+                // s.Slice(count, s.Length - count): 현재 count 위치부터 남은 영역을 선택합니다.
+                // BitConverter.TryWriteBytes: 선택한 영역에 id 값을 바이트 형태로 기록 시도합니다.
                 success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), id);
+                // id를 기록한 후 count를 4바이트만큼 증가시킵니다.
                 count += sizeof(int);
+
+                // 2. level 필드 직렬화 (2바이트)
                 success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), level);
+                // level을 기록한 후 count를 2바이트만큼 증가시킵니다.
                 count += sizeof(short);
+
+                // 3. duration 필드 직렬화 (4바이트)
                 success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), duration);
+                // duration을 기록한 후 count를 4바이트만큼 증가시킵니다.
                 count += sizeof(float);
 
+                // 모든 필드 직렬화 성공 여부를 반환 (한 번이라도 실패하면 false)
                 return success;
             }
+
+
+            /// <Readsummary>
+            /// 주어진 ReadOnlySpan<byte>에서 직렬화된 데이터를 읽어들여,
+            /// 이 구조체의 필드에 역직렬화(데이터 추출)를 수행합니다.
+            /// ReadOnlySpan<byte> s: 역직렬화할 바이트 데이터가 포함된 ReadOnlySpan
+            /// ref ushort count: 현재까지 읽은 바이트 수를 나타내는 카운터.
+            /// 이 값은 역직렬화 중에 업데이트되어, 각 데이터가 읽힌 이후의 시작 인덱스를 나타냅니다.
             public void Read(ReadOnlySpan<byte> s, ref ushort count)
             {
+                // 1. id 필드 읽기 (4바이트)
+                // s.Slice(count, s.Length - count): 현재 count 위치부터 남은 영역을 선택합니다.
                 id = BitConverter.ToInt32(s.Slice(count, s.Length - count));
+                // id를 읽은 후 count를 4바이트만큼 증가시킵니다.
                 count += sizeof(int);
+
+                // 2. level 필드 읽기 (2바이트)
                 level = BitConverter.ToInt16(s.Slice(count, s.Length - count));
+                // level을 읽은 후 count를 2바이트만큼 증가시킵니다.
                 count += sizeof(short);
-                // float 타입은 ToSingle이다(double은 ToDouble).
+
+                // 3. duration 필드 읽기 (4바이트)
+                // ToSingle를 통해 4바이트를 읽어 float 형으로 변환합니다.
                 duration = BitConverter.ToSingle(s.Slice(count, s.Length - count));
+                // duration을 읽은 후 count를 4바이트만큼 증가시킵니다.
                 count += sizeof(float);
             }
         }
