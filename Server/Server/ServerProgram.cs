@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ServerCore;
-using static Server.PlayerInfoReq;
 
 
 namespace Server
@@ -19,6 +18,7 @@ namespace Server
         static Listener _listener = new Listener();
         static void Main(string[] args)
         {
+            PacketManager.Instance.Register();
             // 서버의 IP와 포트를 결정
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
