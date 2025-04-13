@@ -22,12 +22,20 @@ namespace PacketGenerator
         static string genPacket;
         static ushort packetId;
         static string packetEnum;
+        static string clientRegister;
+        static string serverRegister;
+
 
         static void Main(string[] args)
         {
 
             // pdl 경로
-            string pdlPath = "../PDL.xml";
+            string pdlPath = "PDL.xml";
+            // string genPacketPath = "../Common/Packet/GenPackets.cs";
+            // string clientPacketManagerPath = "../Common/Packet/ClientPacketManager.cs";
+            // string serverPacketManagerPath = "../Common/Packet/ServerPacketManager.cs";
+
+
 
             // XML 파싱을 위한 설정 생성
             XmlReaderSettings settings = new XmlReaderSettings()
@@ -70,7 +78,13 @@ namespace PacketGenerator
                 }
                 string fileText = string.Format(PacketFormat.fileFormat, packetEnum, genPacket);
                 File.WriteAllText("GenPackets.cs", fileText);
-            };
+                string clientManagerText = string.Format(PacketFormat.managerFormat, clientRegister);
+                File.WriteAllText("ClientPacketManager.cs", clientManagerText);
+                string serverManagerText = string.Format(PacketFormat.managerFormat, serverRegister);
+                File.WriteAllText("ServerPacketManager.cs", serverManagerText);
+
+            }
+            ;
         }
         // 패킷 검증:
         // r.NodeType이 EndElement이면 반환하고, 노드 이름이 "packet"이 아니면 오류 메시지를 출력합니다.
@@ -94,9 +108,15 @@ namespace PacketGenerator
             
             Tuple<string, string, string> t = ParseMembers(r);
             genPacket += string.Format(PacketFormat.packetFormat, packetName, t.Item1, t.Item2, t.Item3);
-
-            // 하나의 packet의 내용물을 채워넣을 때마다 enum의 정보도 넣어줘야 하기 때문에
             packetEnum += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + Environment.NewLine + "\t";
+            if (packetName.StartsWith("S_") || packetName.StartsWith("s_"))
+            {
+                clientRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
+            }
+            else
+            {
+                serverRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
+            }
         }
 
         // {1} 멤버 변수들

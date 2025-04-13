@@ -3,36 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\packetmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\packetmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\packetgenerator\\packetformat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|solutionrelative:packetgenerator\\packetformat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\clientsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\dummyclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Common\\Packet\\GenPackets.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Common\\Packet\\GenPackets.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\packetgenerator\\pdl.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|solutionrelative:packetgenerator\\pdl.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\serverprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,16 +15,64 @@
       "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\serversession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\packetgenerator\\packetgeneratorprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|solutionrelative:packetgenerator\\packetgeneratorprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\dummyclient\\packet\\clientpacketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\packet\\clientpacketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\dummyclient\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\packet\\packethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\serverpacketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\serverpacketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\dummyclient\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\server\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD46AB9C-DF65-42AF-BDDB-8374E02DC17C}|Server\\Server.csproj|solutionrelative:server\\packet\\genpackets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Common\\Packet\\GenPackets.bat||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Common\\Packet\\GenPackets.bat||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\packetgenerator\\pdl.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|solutionrelative:packetgenerator\\pdl.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\packetgenerator\\packetformat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A7C1E36-4D2D-443B-B152-F8373EC36808}|PacketGenerator\\PacketGenerator.csproj|solutionrelative:packetgenerator\\packetformat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\dummyclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E69A8514-26AD-4F4B-AD92-FE52A6987A66}|DummyClient\\DummyClient.csproj|solutionrelative:dummyclient\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\recvbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\recvbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\sendbuffer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|c:\\users\\user\\source\\repos\\csharp_server\\server\\servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{37B8703C-88EB-4335-9D82-6AAE4C9C7A0E}|ServerCore\\ServerCore.csproj|solutionrelative:servercore\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -75,109 +95,132 @@
           ]
         },
         {
-          "DockedWidth": 318,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 195,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "ServerPacketManager.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\ServerPacketManager.cs",
+              "RelativeDocumentMoniker": "Server\\Packet\\ServerPacketManager.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\ServerPacketManager.cs",
+              "RelativeToolTip": "Server\\Packet\\ServerPacketManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:23:21.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClientPacketManager.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\ClientPacketManager.cs",
+              "RelativeDocumentMoniker": "DummyClient\\Packet\\ClientPacketManager.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\ClientPacketManager.cs",
+              "RelativeToolTip": "DummyClient\\Packet\\ClientPacketManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T14:23:29.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GenPackets.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\GenPackets.cs",
+              "RelativeDocumentMoniker": "DummyClient\\Packet\\GenPackets.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\GenPackets.cs",
+              "RelativeToolTip": "DummyClient\\Packet\\GenPackets.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:38:17.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PacketHandler.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\PacketHandler.cs",
+              "RelativeDocumentMoniker": "DummyClient\\Packet\\PacketHandler.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\Packet\\PacketHandler.cs",
+              "RelativeToolTip": "DummyClient\\Packet\\PacketHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T13:33:57.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "GenPackets.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\GenPackets.cs",
               "RelativeDocumentMoniker": "Server\\Packet\\GenPackets.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\GenPackets.cs",
               "RelativeToolTip": "Server\\Packet\\GenPackets.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBAAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-13T10:41:26.675Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PacketManager.cs",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketManager.cs",
-              "RelativeDocumentMoniker": "Server\\Packet\\PacketManager.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketManager.cs",
-              "RelativeToolTip": "Server\\Packet\\PacketManager.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwC0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T08:41:33.354Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PacketHandler.cs",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketHandler.cs",
-              "RelativeDocumentMoniker": "Server\\Packet\\PacketHandler.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketHandler.cs",
-              "RelativeToolTip": "Server\\Packet\\PacketHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAlwBAAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T08:41:14.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "GenPackets.bat",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Common\\Packet\\GenPackets.bat",
               "RelativeDocumentMoniker": "Common\\Packet\\GenPackets.bat",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Common\\Packet\\GenPackets.bat",
               "RelativeToolTip": "Common\\Packet\\GenPackets.bat",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA1AAAAAAAAAA==",
               "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE8SURBVDhPvZJNSwJRGIWfmcaQiH6DEdEHFBEFBe6KoKKoTf8iAlOmgdbipqBf0rKICAuDkj4WERgulL5o06gLx9S53lZJzrVQgh54uXDOuefdvPAXpJReqW00y4xkQAa8RmtoWb2dz4tLKw0vyACWGZaVSkWZ48SVPDpLKvr3scyw1BtWAPfpLIenl9i5PO92jv2DODd3KW\u002BsjlJg6DqOU2JidIjJsWGckoNhKLE6iuMKQbVaQdQENSFwq1VcV3hjdZSCcrmMBsTPk5wkLtA0SF7f4pQ\u002BvFFoVjA\u002BMsja8hw93V0IV/D69sLj8xOx3T1SD2lvXC34YnVhlvmZIIV8gei2Sd628fs7vbGfCwCKRQdDh/VQBJ\u002Bvo\u002Bnl/low0N/HVmiD4PQUO7EovQH15jTL3MyApjotIbNe5f/5BEiOoURWS5r0AAAAAElFTkSuQmCC",
               "WhenOpened": "2025-04-13T07:01:05.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "ClientProgram.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\ClientProgram.cs",
               "RelativeDocumentMoniker": "DummyClient\\ClientProgram.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\ClientProgram.cs",
               "RelativeToolTip": "DummyClient\\ClientProgram.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T07:20:11.49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-11T07:20:11.49Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "PDL.xml",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PDL.xml",
               "RelativeDocumentMoniker": "PacketGenerator\\PDL.xml",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PDL.xml",
               "RelativeToolTip": "PacketGenerator\\PDL.xml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-04-11T06:58:08.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-11T06:58:08.531Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "PacketFormat.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PacketFormat.cs",
               "RelativeDocumentMoniker": "PacketGenerator\\PacketFormat.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PacketFormat.cs",
               "RelativeToolTip": "PacketGenerator\\PacketFormat.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAwCwAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAwEcAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T07:37:14.458Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-11T07:37:14.458Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "ServerSession.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\ServerSession.cs",
               "RelativeDocumentMoniker": "DummyClient\\ServerSession.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\DummyClient\\ServerSession.cs",
               "RelativeToolTip": "DummyClient\\ServerSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAYwBMAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:27:19.32Z",
               "EditorCaption": ""
@@ -185,24 +228,48 @@
           ]
         },
         {
-          "DockedWidth": 81,
-          "SelectedChildIndex": 3,
+          "DockedWidth": 204,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Listener.cs",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Listener.cs",
-              "RelativeDocumentMoniker": "ServerCore\\Listener.cs",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Listener.cs",
-              "RelativeToolTip": "ServerCore\\Listener.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAApwFUAAAA6AAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "SendBuffer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\SendBuffer.cs",
+              "RelativeDocumentMoniker": "ServerCore\\SendBuffer.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\SendBuffer.cs",
+              "RelativeToolTip": "ServerCore\\SendBuffer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T11:41:27.685Z"
+              "WhenOpened": "2025-04-13T12:45:27.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
+              "Title": "RecvBuffer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\RecvBuffer.cs",
+              "RelativeDocumentMoniker": "ServerCore\\RecvBuffer.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\RecvBuffer.cs",
+              "RelativeToolTip": "ServerCore\\RecvBuffer.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T12:38:52.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Session.cs",
+              "RelativeDocumentMoniker": "ServerCore\\Session.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Session.cs",
+              "RelativeToolTip": "ServerCore\\Session.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAHIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T12:37:37.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Connector.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\ServerCore\\Connector.cs",
               "RelativeDocumentMoniker": "ServerCore\\Connector.cs",
@@ -214,41 +281,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "PacketGeneratorProgram.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PacketGeneratorProgram.cs",
               "RelativeDocumentMoniker": "PacketGenerator\\PacketGeneratorProgram.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\PacketGenerator\\PacketGeneratorProgram.cs",
               "RelativeToolTip": "PacketGenerator\\PacketGeneratorProgram.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAYwEcAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAADMAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-11T06:56:04.933Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "ClientSession.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ClientSession.cs",
               "RelativeDocumentMoniker": "Server\\ClientSession.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ClientSession.cs",
               "RelativeToolTip": "Server\\ClientSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAAAQwEcAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T06:29:46.47Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "ServerProgram.cs",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ServerProgram.cs",
               "RelativeDocumentMoniker": "Server\\ServerProgram.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\ServerProgram.cs",
               "RelativeToolTip": "Server\\ServerProgram.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-11T07:19:51.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PacketHandler.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketHandler.cs",
+              "RelativeDocumentMoniker": "Server\\Packet\\PacketHandler.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\Csharp_Server\\Server\\Server\\Packet\\PacketHandler.cs",
+              "RelativeToolTip": "Server\\Packet\\PacketHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T08:41:14.397Z",
               "EditorCaption": ""
             }
           ]

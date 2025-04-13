@@ -6,8 +6,8 @@ using ServerCore;
 
 public enum PacketID
 {
-    PlayerInfoReq = 1,
-	test = 2,
+    C_PlayerInfoReq = 1,
+	S_Test = 2,
 	
 }
 
@@ -18,7 +18,7 @@ interface IPacket
 	ArraySegment<byte> Write();
 }
 
-class PlayerInfoReq : IPacket
+class C_PlayerInfoReq : IPacket
 {
     public byte testByte;
 	public long playerId;
@@ -84,7 +84,7 @@ class PlayerInfoReq : IPacket
 	public List<Skill> skills = new List<Skill>();
 	
 
-    public ushort Protocol { get { return (ushort)PacketID.PlayerInfoReq; } }
+    public ushort Protocol { get { return (ushort)PacketID.C_PlayerInfoReq; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -121,7 +121,7 @@ class PlayerInfoReq : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.PlayerInfoReq); // packetID는 이름과 동일하게 맞춰줌
+        success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.C_PlayerInfoReq); // packetID는 이름과 동일하게 맞춰줌
         count += sizeof(ushort);
         segment.Array[segment.Offset + count] = (byte)this.testByte;
 		count += sizeof(byte);
@@ -144,11 +144,11 @@ class PlayerInfoReq : IPacket
         return SendBufferHelper.Close(count);
     }
 }
-class test : IPacket
+class S_Test : IPacket
 {
     public int testInt;
 
-    public ushort Protocol { get { return (ushort)PacketID.test; } }
+    public ushort Protocol { get { return (ushort)PacketID.S_Test; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -169,7 +169,7 @@ class test : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.test); // packetID는 이름과 동일하게 맞춰줌
+        success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.S_Test); // packetID는 이름과 동일하게 맞춰줌
         count += sizeof(ushort);
         success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.testInt);
 		count += sizeof(int);
