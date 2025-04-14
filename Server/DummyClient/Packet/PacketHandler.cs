@@ -24,7 +24,7 @@ class PacketHandler
         // playerId가 1일 경우에만 콘솔 로그에 출력
         // if (chatPacket.playerId == 1)
         {
-            Console.WriteLine(chatPacket.chat);
+            //Console.WriteLine(chatPacket.chat);
         }
     }
 }

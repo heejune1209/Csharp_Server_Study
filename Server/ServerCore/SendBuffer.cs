@@ -27,7 +27,7 @@ namespace ServerCore
             return null;
         });
         // 외부에서 ChunkSize를 조정하고 싶을 때 사용
-        public static int ChunkSize { get; set; } = 4096 * 100;
+        public static int ChunkSize { get; set; } = 65535 * 100;
 
         // ThreadLocal에 있는 CurrentBuffer를 관리해줘야 한다.
         public static ArraySegment<byte> Open(int reserveSize)

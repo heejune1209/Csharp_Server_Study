@@ -13,7 +13,7 @@ namespace ServerCore
         // Session 객체를 반환하는 함수를 담는 변수
         Func<Session> _sessionFactory;
 
-        public void Init(IPEndPoint endPoint, Func<Session> sessionFactory)
+        public void Init(IPEndPoint endPoint, Func<Session> sessionFactory, int register = 10, int backlog = 100)
         {
             // 세션을 어떻게 생성할지 결정하는 팩토리 함수를 저장
             _sessionFactory += sessionFactory;
@@ -22,13 +22,13 @@ namespace ServerCore
             // IP와 포트를 바인딩 – 서버의 "주소와 전화번호" 지정
             _listenSoket.Bind(endPoint);
             // 클라이언트 연결 대기를 시작 (backlog 10으로 설정)
-            _listenSoket.Listen(10);
+            _listenSoket.Listen(backlog);
 
             // 현재 문지기를 한명만 고용을 했기 때문에 
             // 너무 많은 사람이 한번에 접속을 하면 다소 느릴 수도 있다
             // 해서 이 부분을 늘려주면 된다.
             // 클라이언트의 연결 요청을 비동기로 기다리기 위해 여러 Accept 대기 작업을 등록한다.
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < register; i++)
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 // 연결 완료 시 실행될 이벤트 핸들러 등록

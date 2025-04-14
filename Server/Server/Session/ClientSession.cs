@@ -25,8 +25,9 @@ namespace Server
             // 서버에 클라이언트가 접속을 했다면 강제로 채팅방에 들어오게 만듬
             // 하지만 실제 게임에서는 클라이언트 쪽에서 모든 리소스 업데이트가 완료 되었을 때 
             // 서버에 신호를 보내고 그때 채팅방에 들어오는 작업을 해줘야 한다.
+            ServerProgram.Room.Push(() => ServerProgram.Room.Enter(this)); // 방에 들어간다.
 
-            ServerProgram.Room.Enter(this); // 방에 들어간다.
+
             /*               
             Packet packet = new Packet() { size = 4, packetId = 7 };
 
@@ -108,7 +109,12 @@ namespace Server
             // 방에서 나간다.
             if (Room != null)
             {
-                Room.Leave(this);
+                // Room.Leave(this)이 나중에 실행 될 때 Room이 이미 null인 상태이기 때문에
+                // Null Exception이 발생하게 된다.
+                // Room이 null로 밀어진다 하더라도 room은 Room을 아직 참조하고 있기 때문에
+                // null exception이 해결이 된다.
+                GameRoom room = Room;
+                room.Push(() => room.Leave(this));
                 Room = null;
             }
                 
@@ -120,7 +126,7 @@ namespace Server
 
         public override void OnSend(int numOfBytes)
         {
-            Console.WriteLine($"Transferred bytes : {numOfBytes}");
+            //Console.WriteLine($"Transferred bytes : {numOfBytes}");
         }
         
 

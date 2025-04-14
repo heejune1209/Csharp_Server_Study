@@ -55,6 +55,7 @@ namespace ServerCore
         public sealed override int OnRecv(ArraySegment<byte> buffer)
         {
             int processLength = 0;
+            int packetCount = 0;
 
             // 상대방이 보낸 패킷의 내용물 예시
             // [size(2)][packetId(2)][....][size(2)][packetId(2)]... 반복
@@ -81,6 +82,9 @@ namespace ServerCore
                 // buffer.Slice()를 통해 컷팅을 하는 것도 가능하다 
                 // => new ArraySegment가 가독성이 좀 더 좋고 struct라서 힙에 할당 되지도 않음 
 
+                // 패킷을 처리했으니 패킷 카운트 증가
+                packetCount++;
+
                 // 패킷 처리를 진행해야 할 전체 패킷의 크기를 저장
                 processLength += dataSize;
 
@@ -88,6 +92,11 @@ namespace ServerCore
                 // buffer.Offset + dataSize : 1개의 패킷을 제거 한 다음부터 시작
                 // buffer.Count - dataSize : 1개의 패킷을 제거한 다음 전체 크기
                 buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
+            }
+
+            if(packetCount > 1)
+            {                
+                Console.WriteLine($"패킷 모아보내기 : {packetCount}");
             }
 
             // break가 될 때까지 처리한 바이트의 수
@@ -112,7 +121,7 @@ namespace ServerCore
 
         //_recvBuffer가 호출되는 시점?
         // Register를 할 때!
-        RecvBuffer _recvBuffer = new RecvBuffer(1024);
+        RecvBuffer _recvBuffer = new RecvBuffer(65535);
 
         Queue<ArraySegment<byte>> _sendQueue = new Queue<ArraySegment<byte>>();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
@@ -154,16 +163,34 @@ namespace ServerCore
         // 만약 현재 _pendingList에 보낼 데이터가 없다면 (즉, 현재 진행 중인 Send 작업이 없으면),
         // RegisterSend()를 호출해 전송 작업을 시작한다.
         // 동시에 여러 전송 요청이 들어올 수 있으므로, _lock으로 동기화한다.
-        public void Send(ArraySegment<byte> sendBuff)
+        public void Send(List<ArraySegment<byte>> sendBuffList)
         {
+            // 최소한의 방어 => 현재 _disconnect인 상태일 때 종료
+            if (sendBuffList.Count == 0)
+                return;
+
             lock (_lock)
             {
-                _sendQueue.Enqueue(sendBuff);
+                // 전송할 데이터가 들어오면, _sendQueue에 추가
+                foreach (ArraySegment<byte> sendBuff in sendBuffList)
+                {
+                    _sendQueue.Enqueue(sendBuff);
+                }                
 
                 if (_pendingList.Count == 0)
                 {
                     RegisterSend();
                 }
+            }
+        }
+
+        public void Send(ArraySegment<byte> sendBuff)
+        {
+            lock (_lock)
+            {
+                _sendQueue.Enqueue(sendBuff);
+                if (_pendingList.Count == 0)
+                    RegisterSend();
             }
         }
 
