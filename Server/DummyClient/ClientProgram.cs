@@ -21,21 +21,22 @@ namespace DummyClient
             Connector connector = new Connector();
             // 의존성 주입
             // 커넥터는 클라이언트 입장에서 서버에 연결 요청 (ConnectAsync())을 하는 역할.
-            connector.Connect(endPoint, () => { return new ServerSession(); });
+            // 10명의 세션을 생성할 수 있도록 설정
+            connector.Connect(endPoint, () => { return SessionManager.Instance.Generate(); }, 100);
 
             while (true)
             {               
 
                 try
                 {
-                    
+                    SessionManager.Instance.SendForEach();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
 
-                Thread.Sleep(100); // 1초 대기
+                Thread.Sleep(250); // 1초 대기
             }
         }
     }

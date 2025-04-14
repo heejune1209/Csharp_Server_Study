@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using DummyClient;
 using ServerCore;
 
 // 수동으로 관리 => 특정 패킷 타입이 도착했을 때 호출할 함수를 정의하는 역할을 함
@@ -14,8 +15,16 @@ class PacketHandler
     // 여기서 실제로는 PlayerInfoReq 형식이어야 합니다.
     
 
-    internal static void S_TestHandler(PacketSession session, IPacket packet)
+    public static void S_ChatHandler(PacketSession session, IPacket packet)
     {
-        
+        S_Chat chatPacket = packet as S_Chat;
+        ServerSession serverSession = session as ServerSession;
+
+        // 더미 클라이언트가 10개 => 모든 메시지를 다 출력하지 않고 
+        // playerId가 1일 경우에만 콘솔 로그에 출력
+        // if (chatPacket.playerId == 1)
+        {
+            Console.WriteLine(chatPacket.chat);
+        }
     }
 }

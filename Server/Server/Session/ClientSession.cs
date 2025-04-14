@@ -16,10 +16,17 @@ namespace Server
     // 각자의 대리자가 되어 요청을 처리하는 역할
     class ClientSession : PacketSession
     {
+        public int SessionId { get; set; } // 세션 ID
+        public GameRoom Room { get; set; } // 현재 어떤 방에 있는지
         public override void OnConnected(EndPoint endPoint)
         {
             // 연결된 클라이언트의 EndPoint를 로그로 남긴다.
-            System.Console.WriteLine($"OnConnected : {endPoint}");
+            Console.WriteLine($"OnConnected : {endPoint}");
+            // 서버에 클라이언트가 접속을 했다면 강제로 채팅방에 들어오게 만듬
+            // 하지만 실제 게임에서는 클라이언트 쪽에서 모든 리소스 업데이트가 완료 되었을 때 
+            // 서버에 신호를 보내고 그때 채팅방에 들어오는 작업을 해줘야 한다.
+
+            ServerProgram.Room.Enter(this); // 방에 들어간다.
             /*               
             Packet packet = new Packet() { size = 4, packetId = 7 };
 
@@ -53,7 +60,7 @@ namespace Server
             // 최종적으로 sendBuff (즉, 복사한 버퍼의 실제 사용 영역)를 인자로 하여 Session의 Send() 메서드를 호출해서 전송을 요청한다.
             Send(sendBuff);
             */
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
             Disconnect();
         }
 
@@ -96,6 +103,16 @@ namespace Server
 
         public override void OnDisconnected(EndPoint endPoint)
         {
+            SessionManager.Instance.Remove(this);
+            
+            // 방에서 나간다.
+            if (Room != null)
+            {
+                Room.Leave(this);
+                Room = null;
+            }
+                
+            
             Console.WriteLine($"OnDisconnected : {endPoint}");
         }
 

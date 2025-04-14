@@ -130,6 +130,15 @@ namespace ServerCore
         // 연결이 끊겼을 때 호출
         public abstract void OnDisconnected(EndPoint endPoint);
 
+        void Clear()
+        {
+            lock (_lock)
+            {
+                _sendQueue.Clear();
+                _pendingList.Clear();
+            }
+        }
+
         // 호출 및 수신 준비 등록
         public void Start(Socket socket)
         {
@@ -167,6 +176,10 @@ namespace ServerCore
         // 만약 SendAsync()가 즉시 완료된다면(반환값이 false), 직접 OnSendComplected()를 호출한다
         void RegisterSend()
         {
+            // 최소한의 방어 => 현재 _disconnect인 상태일 때 종료
+            if (_disconnected == 1)
+                return;
+
             while (_sendQueue.Count > 0)
             {
                 ArraySegment<byte> buff = _sendQueue.Dequeue();
@@ -174,13 +187,21 @@ namespace ServerCore
             }
             _sendArgs.BufferList = _pendingList;
 
-            // 비동기 전송 작업을 시작
-            bool pending = _socket.SendAsync(_sendArgs);
-
-            if (pending == false)
+            try
             {
-                OnSendComplected(null, _sendArgs);
+                // 비동기 전송 작업을 시작
+                bool pending = _socket.SendAsync(_sendArgs);
+
+                if (pending == false)
+                {
+                    OnSendComplected(null, _sendArgs);
+                }
             }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"Register Send Failed {e}");
+            }
+            
         }
 
         // 전송 완료 후 처리
@@ -223,6 +244,10 @@ namespace ServerCore
         // 비동기 수신 등록
         private void RegisterRecv()
         {
+            // 최소한의 방어 => 현재 _disconnect인 상태일 때 종료
+            if (_disconnected == 1)
+                return;
+
             // 버퍼의 읽기/쓰기 위치를 초기화
             _recvBuffer.Clean();
             // 현재 유효한 범위를 집어줘야 한다.
@@ -232,13 +257,21 @@ namespace ServerCore
             // 데이터를 받을 버퍼 설정
             _recvArgs.SetBuffer(segment.Array, segment.Offset, segment.Count);
 
-            // 비동기 수신 작업을 OS에 요청
-            bool pending = _socket.ReceiveAsync(_recvArgs);
-
-            if (pending == false)
+            try
             {
-                OnRecvComplected(null, _recvArgs);
+                // 비동기 수신 작업을 OS에 요청
+                bool pending = _socket.ReceiveAsync(_recvArgs);
+
+                if (pending == false)
+                {
+                    OnRecvComplected(null, _recvArgs);
+                }
             }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"RegisterRecv Failed {e}");
+            }
+            
         }
 
         // 수신이 완료되면, 이 콜백 함수가 호출된다.
@@ -311,6 +344,7 @@ namespace ServerCore
             OnDisconnected(_socket.RemoteEndPoint);
             _socket.Shutdown(SocketShutdown.Both);
             _socket.Close();
+            Clear();
         }
     }
 }

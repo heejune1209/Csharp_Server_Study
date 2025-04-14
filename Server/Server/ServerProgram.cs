@@ -16,9 +16,12 @@ namespace Server
         // 해당 리스너는 프로그램 전체에서 하나의 인스턴스로 공유.
         // 어디서든 접근할 수 있게 할수 있다.
         static Listener _listener = new Listener();
+        // 향후 다양한 GameRoom을 생성해서 관리하는 Manager가 등판할 예정
+        public static GameRoom Room = new GameRoom();
+
         static void Main(string[] args)
         {
-            PacketManager.Instance.Register();
+            
             // 서버의 IP와 포트를 결정
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
@@ -29,7 +32,10 @@ namespace Server
             // 이때, Init()에 세션 생성 팩토리 함수(예: () => new GameSession())도 함께 전달하여
             // 클라이언트가 접속할 경우 세션을 어떤 방식으로 만들지를 결정
             // 리스너는 서버편에서 클라이언트의 연락을 대기 및 연결 수락(AcceptAsync())의 역할을 함.
-            _listener.Init(endPoint, () => { return new ClientSession(); }); // 세션을 만드는 함수 등록
+
+            // Session Manager를 통해서 Session을 발급해주도록 개선할 수도 있다.
+            // 그래야 발급한 Session의 갯수와 Session ID를 관리하기 쉽다.
+            _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); }); // 세션을 만드는 함수 등록
             Console.WriteLine("Listening...");
 
             // 프로그램이 종료되지 않도록 임시록 남겨둠
