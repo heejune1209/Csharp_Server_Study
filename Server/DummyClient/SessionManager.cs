@@ -24,6 +24,9 @@ namespace DummyClient
                 {
                     C_Chat chatPacket = new C_Chat();
                     chatPacket.chat = "Hello Server !";
+
+                    // 전송전에 C_Chat 객체의 정보를 chatPacket.Write() 호출을 통해 직렬화해서
+                    // ArraySegment<byte> 형태의 바이트 데이터로 변환합니다.
                     ArraySegment<byte> segment = chatPacket.Write();
 
                     session.Send(segment);

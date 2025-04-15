@@ -163,6 +163,7 @@ namespace ServerCore
         // 만약 현재 _pendingList에 보낼 데이터가 없다면 (즉, 현재 진행 중인 Send 작업이 없으면),
         // RegisterSend()를 호출해 전송 작업을 시작한다.
         // 동시에 여러 전송 요청이 들어올 수 있으므로, _lock으로 동기화한다.
+        // 서버에서 클라이언트로 보낼 때 사용하는 용도
         public void Send(List<ArraySegment<byte>> sendBuffList)
         {
             // 최소한의 방어 => 현재 _disconnect인 상태일 때 종료
@@ -184,6 +185,7 @@ namespace ServerCore
             }
         }
 
+        // 클라이언트에서 서버로 보낼때 사용하는 용도
         public void Send(ArraySegment<byte> sendBuff)
         {
             lock (_lock)

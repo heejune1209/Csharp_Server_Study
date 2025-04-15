@@ -18,10 +18,15 @@ namespace Server
         static Listener _listener = new Listener();
         // 향후 다양한 GameRoom을 생성해서 관리하는 Manager가 등판할 예정
         public static GameRoom Room = new GameRoom();
+        // ServerProgram에서는 GameRoom 인스턴스를 전역적으로 관리하며,
+        // 주기적으로 JobTimer에 Flush 작업을 예약해 방에 쌓인 메시지를 한 번에 브로드캐스트합니다.
+        // 예를 들어 ServerProgram.Room.Push(() => Room.Flush())
+        // 또는 JobTimer.Instance.Push(FlushRoom, 250) 형태로 호출합니다.
 
         static void FlushRoom()
         {
             Room.Push(() => Room.Flush());
+            // 일정 간격마다 Flush를 예약
             JobTimer.Instance.Push(FlushRoom, 250);
         }
 
@@ -58,6 +63,7 @@ namespace Server
 
             while (true)
             {
+                // 예약된 작업을 실행
                 JobTimer.Instance.Flush();
             }
 

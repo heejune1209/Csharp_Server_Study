@@ -7,6 +7,8 @@ using System.Collections.Generic;
 namespace Server
 {
     // ServerCore에서 작업해도 괜찮다. => 단순 취향 차이
+    // 생성된 클라이언트 세션은 SessionManager에 의해 관리되어,
+    // 각 세션에 고유한 ID를 부여하고, 필요 시 찾거나 제거할 수 있도록 합니다.
     class SessionManager
     {
         static SessionManager _instance = new SessionManager();
