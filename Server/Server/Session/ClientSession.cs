@@ -18,6 +18,11 @@ namespace Server
     {
         public int SessionId { get; set; } // 세션 ID
         public GameRoom Room { get; set; } // 현재 어떤 방에 있는지
+
+        public float PosX { get; set; }
+        public float PosY { get; set; }
+        public float PosZ { get; set; }
+
         public override void OnConnected(EndPoint endPoint)
         {
             // 연결된 클라이언트의 EndPoint를 로그로 남긴다.
@@ -61,8 +66,8 @@ namespace Server
             // 최종적으로 sendBuff (즉, 복사한 버퍼의 실제 사용 영역)를 인자로 하여 Session의 Send() 메서드를 호출해서 전송을 요청한다.
             Send(sendBuff);
             */
-            Thread.Sleep(5000);
-            Disconnect();
+            //Thread.Sleep(5000);
+            //Disconnect();
         }
 
         // buffer : 1개의 유효한(완전한) 패킷
